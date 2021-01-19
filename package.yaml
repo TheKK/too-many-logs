@@ -49,13 +49,13 @@ executables:
     dependencies:
     - too-many-logs
 
-# tests:
-#   {{name}}-test:
-#     main:                Spec.hs
-#     source-dirs:         test
-#     ghc-options:
-#     - -threaded
-#     - -rtsopts
-#     - -with-rtsopts=-N
-#     dependencies:
-#     - {{name}}
+tests:
+  tml-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - too-many-logs
