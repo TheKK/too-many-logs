@@ -15,24 +15,25 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "haskell-nix": {
       "locked": {
-        "lastModified": 1609945281,
-        "narHash": "sha256-//49JhpLwwqra1bx2q5i8pI1HsGFgNmnoPtklF0uTcw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "44c443a7a602e7752641aac21e4ad17061761290",
+        "lastModified": 1611055638,
+        "narHash": "sha256-KuF6S22XqXEooaTB/zofiMzXrvwq2VbgkrhOYyCIMJA=",
+        "owner": "input-output-hk",
+        "repo": "haskell.nix",
+        "rev": "6e34587fc84413b0473e1673c782f1cf7daba665",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "owner": "input-output-hk",
+        "repo": "haskell.nix",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "haskell-nix": "haskell-nix"
       }
     }
   },
