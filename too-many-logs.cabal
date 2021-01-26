@@ -25,10 +25,10 @@ library
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
-    , relude
-    , streamly
-    , time
+      base ==4.14.*
+    , relude ==0.7.*
+    , streamly ==0.7.*
+    , time ==1.9.*
   mixins:
       base hiding (Prelude)
     , relude (Relude as Prelude)
@@ -42,10 +42,10 @@ executable tml
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
-    , relude
-    , streamly
-    , time
+      base ==4.14.*
+    , relude ==0.7.*
+    , streamly ==0.7.*
+    , time ==1.9.*
     , too-many-logs
   mixins:
       base hiding (Prelude)
@@ -61,10 +61,10 @@ test-suite tml-test
       test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
-    , relude
-    , streamly
-    , time
+      base ==4.14.*
+    , relude ==0.7.*
+    , streamly ==0.7.*
+    , time ==1.9.*
     , too-many-logs
   mixins:
       base hiding (Prelude)

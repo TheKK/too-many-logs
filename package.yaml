@@ -31,12 +31,13 @@ ghc-options:
 
 dependencies:
 - name: base
-  version: ">= 4.7 && < 5"
+  version: "== 4.14.*"
   mixin: hiding (Prelude)
 - name: relude
+  version: "== 0.7.*"
   mixin: (Relude as Prelude)
-- streamly
-- time
+- streamly == 0.7.*
+- time == 1.9.*
 
 library:
   source-dirs: src
