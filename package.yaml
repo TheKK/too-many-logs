@@ -30,9 +30,12 @@ ghc-options:
 - -Wredundant-constraints
 
 dependencies:
-- base >= 4.7 && < 5
+- name: base
+  version: ">= 4.7 && < 5"
+  mixin: hiding (Prelude)
+- name: relude
+  mixin: (Relude as Prelude)
 - streamly
-- text
 - time
 
 library:
