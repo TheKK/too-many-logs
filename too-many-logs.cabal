@@ -19,6 +19,7 @@ extra-source-files:
 library
   exposed-modules:
       Lib
+      TooManyLogs
   other-modules:
       Paths_too_many_logs
   hs-source-dirs:
