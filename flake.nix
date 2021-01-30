@@ -22,6 +22,11 @@
 
         too-many-logs = haskellNix.too-many-logs.components.exes.tml;
 
+        # TODO It's better to connect ghcid with this derivation directly.
+        test-repl = pkgs.writeShellScriptBin "test-repl" ''
+          ghcid -c 'cabal new-repl test:tml-test --flags=ghcid' -T ":main"
+        '';
+
       in {
         packages.too-many-logs = too-many-logs;
 
@@ -31,9 +36,13 @@
           tools = {
             cabal = "3.2.0.0";
             haskell-language-server = "0.8.0";
+            ghcid = "0.8.7";
           };
-          nativeBuildInputs =
-            [ hsPkgs.hpack haskellNix.too-many-logs.project.roots ];
+          nativeBuildInputs = [
+            test-repl # Used for writing tests.
+            hsPkgs.hpack
+            haskellNix.too-many-logs.project.roots
+          ];
           exactDeps = true;
         };
 
