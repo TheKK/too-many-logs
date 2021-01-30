@@ -38,6 +38,7 @@ dependencies:
   mixin: (Relude as Prelude)
 - streamly == 0.7.*
 - time == 1.9.*
+- safe-exceptions == 0.1.7.*
 
 library:
   source-dirs: src
@@ -56,10 +57,10 @@ executables:
 tests:
   tml-test:
     main:                Spec.hs
-    source-dirs:         test
+    source-dirs:         [test, src]
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - too-many-logs
+    - hedgehog
