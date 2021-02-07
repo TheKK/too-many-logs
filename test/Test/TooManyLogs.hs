@@ -5,6 +5,7 @@ module Test.TooManyLogs (tests) where
 
 import Hedgehog
   ( Property,
+    assert,
     checkParallel,
     cover,
     discover,
@@ -13,10 +14,11 @@ import Hedgehog
     (===),
   )
 import qualified Test.Constants as C
-import Test.Gen (genUTCTime)
+import Test.Gen (absFile, genUTCTime)
 import TooManyLogs
-  ( FilterType (FilterInRange),
-    Log (timestamp),
+  ( FilterType (FilterFromFile, FilterInRange),
+    Log (fromFile, timestamp),
+    logIsFromFile,
     logIsInTimeRange,
     logMatchFilter,
   )
@@ -52,6 +54,12 @@ prop_filterInRange_alwayOutOfRange = property $ do
 
   cover 100 "out of range" $ not isInRange
 
+prop_logIsFromFile :: Property
+prop_logIsFromFile = property $ do
+  fileName <- forAll absFile
+  let log = C.log {fromFile = fileName}
+  assert $ logIsFromFile fileName log
+
 prop_logMatchFilter_isoToFilterInRange :: Property
 prop_logMatchFilter_isoToFilterInRange = property $ do
   begin <- forAll genUTCTime
@@ -62,6 +70,12 @@ prop_logMatchFilter_isoToFilterInRange = property $ do
 
   logMatchFilter (FilterInRange (begin, end)) log
     === logIsInTimeRange (begin, end) log
+
+prop_logMatchFilter_isoToFilterFromFile :: Property
+prop_logMatchFilter_isoToFilterFromFile = property $ do
+  fileName <- forAll absFile
+  let log = C.log {fromFile = fileName}
+  logMatchFilter (FilterFromFile fileName) log === logIsFromFile fileName log
 
 tests :: IO Bool
 tests = checkParallel $$(discover)
