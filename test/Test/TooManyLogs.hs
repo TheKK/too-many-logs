@@ -12,10 +12,11 @@ import Hedgehog
     property,
     (===),
   )
+import qualified Test.Constants as C
 import Test.Gen (genUTCTime)
 import TooManyLogs
   ( FilterType (FilterInRange),
-    Log (Log),
+    Log (timestamp),
     logIsInTimeRange,
     logMatchFilter,
   )
@@ -34,7 +35,9 @@ prop_filterInRange = property $ do
   cover 10 "in range" isInRange
   cover 10 "out of range" $ not isInRange
 
-  logIsInTimeRange (begin, end) (Log logTimeStamp "hostname" "id" "msg")
+  let log = C.log {timestamp = logTimeStamp}
+
+  logIsInTimeRange (begin, end) log
     === isInRange
 
 prop_filterInRange_alwayOutOfRange :: Property
@@ -55,7 +58,7 @@ prop_logMatchFilter_isoToFilterInRange = property $ do
   end <- forAll genUTCTime
   logTimeStamp <- forAll genUTCTime
 
-  let log = Log logTimeStamp "hostname" "id" "msg"
+  let log = C.log {timestamp = logTimeStamp}
 
   logMatchFilter (FilterInRange (begin, end)) log
     === logIsInTimeRange (begin, end) log
