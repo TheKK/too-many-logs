@@ -39,6 +39,7 @@ dependencies:
 - streamly == 0.7.*
 - time == 1.9.*
 - safe-exceptions == 0.1.7.*
+- path == 0.8.*
 
 library:
   source-dirs: src

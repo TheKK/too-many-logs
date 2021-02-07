@@ -27,6 +27,7 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints
   build-depends:
       base ==4.14.*
+    , path ==0.8.*
     , relude ==0.7.*
     , safe-exceptions ==0.1.7.*
     , streamly ==0.7.*
@@ -45,6 +46,7 @@ executable tml
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base ==4.14.*
+    , path ==0.8.*
     , relude ==0.7.*
     , safe-exceptions ==0.1.7.*
     , streamly ==0.7.*
@@ -72,6 +74,7 @@ test-suite tml-test
   build-depends:
       base ==4.14.*
     , hedgehog
+    , path ==0.8.*
     , relude ==0.7.*
     , safe-exceptions ==0.1.7.*
     , streamly ==0.7.*
