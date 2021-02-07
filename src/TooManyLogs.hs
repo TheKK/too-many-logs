@@ -15,6 +15,8 @@ import Path
 -- | The log we love and hate.
 data Log = Log
   { fromFile :: Path Abs File,
+    -- | Often this field is used for sorting.
+    indexInFile :: Word32,
     timestamp :: UTCTime,
     hostname :: Text,
     identifier :: Text,
