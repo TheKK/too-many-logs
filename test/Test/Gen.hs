@@ -8,6 +8,7 @@ module Test.Gen
     relDir,
     absDir,
     relFile,
+    log,
   )
 where
 
@@ -17,6 +18,7 @@ import Hedgehog (Gen)
 import qualified Hedgehog.Gen as Gen
 import qualified Hedgehog.Range as Range
 import Path
+import TooManyLogs (Log (..))
 
 -- | Gen Day with year of Gen.enum (-2020) 2020 and dayOfYear of Gen.enum 1 366.
 genDay :: Gen Day
@@ -34,6 +36,16 @@ genUTCTime = UTCTime <$> genDay <*> genDayTime
   where
     -- We ignore leap-seconds here due to its complexity.
     genDayTime = Gen.enum 0 86400
+
+log :: Gen Log
+log =
+  Log
+    <$> absFile
+    <*> Gen.word32 (Range.linear 1 1000)
+    <*> genUTCTime
+    <*> Gen.text (Range.linear 1 100) Gen.unicode
+    <*> Gen.text (Range.linear 1 100) Gen.unicode
+    <*> Gen.text (Range.linear 1 100) Gen.unicode
 
 relDir :: Gen (Path Rel Dir)
 relDir = do
