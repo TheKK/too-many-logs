@@ -22,6 +22,28 @@ data Log = Log
     identifier :: Text,
     message :: Text
   }
+  deriving (Show)
+
+instance Eq Log where
+  a == b =
+    getAll $
+      foldMap
+        All
+        [ ((==) `on` timestamp) a b,
+          ((==) `on` fromFile) a b,
+          ((==) `on` indexInFile) a b
+        ]
+
+instance Ord Log where
+  -- Logically we only care about timestamp, fromFile and indexInFile to decide the
+  -- ordering. Other fields should be ignore since sorting on field like message or
+  -- hostname makes no sense.
+  compare =
+    fold
+      [ compare `on` timestamp,
+        compare `on` fromFile,
+        compare `on` indexInFile
+      ]
 
 data FilterType
   = FilterInRange (UTCTime, UTCTime)
